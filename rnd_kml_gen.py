@@ -2,20 +2,28 @@
 
 import random, os.path
 # Let's create a file and write it to disk.
-filename = "rnd_kml.kml"
+filename = "random.kml"
 
+# Header info for the KML
 header = ('<?xml version="1.0" encoding="UTF-8"?>\n'
 			'<kml xmlns="http://www.opengis.net/kml/2.2">\n'
 			'<Document>\n')
 
 FILE = open(filename,"w")
 FILE.write(header)
+numMarkers = int(raw_input("How many markers: "))
+nLat = int(raw_input("Northern-most Latitude: "))
+sLat = int(raw_input("Southern-most Latitude: "))
+wLong = int(raw_input("Western-most Longitude: "))
+eLong = int(raw_input("Eastern-most Longitude: "))
+maxZed = int(raw_input("Maximum Z Value (meters): "))
+
 
 count = 0
-while (count < 100):
-	latitude = random.uniform(45,46) #you can go -90 to 90
-	longitude = random.uniform(-122, -121) # you can go -180 to 180
-	zed = random.uniform(0, 200000) #extrude value
+while (count < numMarkers):
+	latitude = random.uniform(sLat,nLat) #you can go -90 to 90
+	longitude = random.uniform(wLong,eLong) # you can go -180 to 180
+	zed = random.uniform(0, maxZed) #extrude value
 	azimuth = random.randrange(0,359) #random heading 0-359
 	kml = (
 	   '<Placemark>\n'
